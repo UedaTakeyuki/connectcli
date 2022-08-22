@@ -1,0 +1,22 @@
+[Unit]
+Description=Get temp, humid, and humiditydeficit data & Post to the monitor
+After=rc-local.service
+
+[Service]
+WorkingDirectory=/home/pi/connectcli
+ExecStart=/home/pi/connectcli/connectcli
+Restart=always
+#RestartSec=90
+RestartSec=30
+Type=simple
+PIDFile=/var/run/connectcli.pid
+# https://stackoverflow.com/a/43830129/11073131
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=connectcli
+
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target
