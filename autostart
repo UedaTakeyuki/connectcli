@@ -11,7 +11,8 @@
 # @copyright Copyright© Atelier UEDA 2018 - All rights reserved.
 #
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
+CMD=connectcli
+#CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
 
 usage_exit(){
   echo "Usage: $0 [--on]/[--off]" 1>&2
@@ -23,12 +24,12 @@ usage_exit(){
 
 on(){
   # create systemctl unit file if not exist
-  if [ ! -f ${CMD}.service ]; then
-    cp autostart/autostart.service ${CMD}.service
-    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${SCRIPT_DIR}@" ${CMD}.service
-    sed -i "s@^ExecStart=.*@ExecStart=${SCRIPT_DIR}/${CMD}@" ${CMD}.service
-    sed -i "s@PIDFile=/var/run/.*@PIDFile=/var/run/${CMD}.pid@" ${CMD}.service
-  fi
+#  if [ ! -f ${CMD}.service ]; then
+#    cp autostart/autostart.service ${CMD}.service
+#    sed -i "s@^WorkingDirectory=.*@WorkingDirectory=${SCRIPT_DIR}@" ${CMD}.service
+#    sed -i "s@^ExecStart=.*@ExecStart=${SCRIPT_DIR}/${CMD}@" ${CMD}.service
+#    sed -i "s@PIDFile=/var/run/.*@PIDFile=/var/run/${CMD}.pid@" ${CMD}.service
+#  fi
 #	sudo cp ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
   sudo ln -s ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
   sudo systemctl daemon-reload
