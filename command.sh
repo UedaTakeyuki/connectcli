@@ -6,4 +6,6 @@ case $1 in
  1) sudo shutdown -h 0 ;;
  2) vmstat ;;
  3) df ;;
+ 4) : ;;
+ 5) : ;;
 esac
